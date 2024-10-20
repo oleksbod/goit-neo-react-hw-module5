@@ -1,0 +1,28 @@
+.movieSection {
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+}
+
+.imageWrapper {
+  width: 100%;
+  max-width: 300px;
+  min-width: 150px;
+}
+
+.img {
+  width: 100%;
+}
+
+.movieDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.additionalSection {
+  padding: 20px 0;
+  border-bottom: 1px solid black;
+}

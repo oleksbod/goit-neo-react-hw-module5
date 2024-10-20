@@ -1,0 +1,13 @@
+.container {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.author {
+  font-weight: 700;
+  display: list-item;
+  list-style-type: square;
+  list-style-position: outside;
+}
