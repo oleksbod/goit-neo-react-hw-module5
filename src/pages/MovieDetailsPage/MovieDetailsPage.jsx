@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import css from './MovieDetailsPage.module.css';
 import { BackLink } from '../../components/BackLink/BackLink';
@@ -6,13 +6,10 @@ import { fetchMovieDetails } from '../../api/movie-api';
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
-  const [backLinkHref, setBackLinkHref] = useState('/movies');
   const { movieId } = useParams();
   const location = useLocation();
 
-  useEffect(() => {
-    setBackLinkHref(location.state ?? '/movies');
-  }, []);
+  const backLinkRef = useRef(location.state ?? '/movies');
 
   useEffect(() => {
     async function fetchMovie() {
@@ -33,7 +30,7 @@ const MovieDetailsPage = () => {
         <div>Loading...</div>
       ) : (
         <div>
-          <BackLink to={backLinkHref}>Go back</BackLink>
+          <BackLink to={backLinkRef.current}>Go back</BackLink>
           <section className={css.movieSection}>
             <div className={css.imageWrapper}>
               <img

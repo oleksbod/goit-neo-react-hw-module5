@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import css from './SearchBox.module.css';
+import { useSearchParams } from 'react-router-dom';
 
-export const SearchBox = ({ onSearch }) => {
+export const SearchBox = () => {
+  const [, setSearchParams] = useSearchParams();
   const [value, setValue] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const nextParams = value !== '' ? { name: value } : {};
+    setSearchParams(nextParams);
+    setValue('');
+  };
+
   return (
-    <div className={css.wrapper}>
+    <form className={css.wrapper} onSubmit={handleSubmit}>
       <input
         className={css.input}
         type="text"
@@ -13,14 +22,9 @@ export const SearchBox = ({ onSearch }) => {
         onChange={(e) => setValue(e.target.value)}
       />
 
-      <button
-        className={css.searchBtn}
-        onClick={() => {
-          onSearch(value);
-          setValue('');
-        }}>
+      <button className={css.searchBtn} type="submit">
         Search
       </button>
-    </div>
+    </form>
   );
 };

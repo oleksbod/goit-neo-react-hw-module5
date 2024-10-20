@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { searchMovies } from '../../api/movie-api';
 
 const MoviesPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const movieTitle = searchParams.get('name') ?? '';
   const [movies, setMovies] = useState([]);
 
@@ -26,14 +26,9 @@ const MoviesPage = () => {
     searchMoviesByTitle();
   }, [movieTitle]);
 
-  const updateQueryString = (name) => {
-    const nextParams = name !== '' ? { name } : {};
-    setSearchParams(nextParams);
-  };
-
   return (
     <div>
-      <SearchBox onSearch={updateQueryString} />
+      <SearchBox />
 
       <MovieList movies={movies} />
     </div>
